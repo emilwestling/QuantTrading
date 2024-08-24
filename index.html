@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LSTM Trading Strategy</title>
+    <style>
+        body {
+            background-color: #201d1d;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+            Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            line-height: 1.6;
+            padding: 40px;
+        }
+        header {
+            background-color: #201d1d;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        nav {
+            margin: 20px;
+            text-align: center;
+        }
+        nav a {
+            color: #64b5f6;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section h2 {
+            border-bottom: 2px solid #64b5f6;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .link {
+            color: #64b5f6;
+        }
+        .visualization img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 10px auto;
+        }
+        footer {
+            background-color: #1e1e1e;
+            padding: 10px 20px;
+            text-align: center;
+            color: #e0e0e0;
+        }
+
+        .menu-bar {
+        background-color: #201d1d; /* Dark background for the menu */
+        padding: 10px 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+      }
+      .menu-bar a {
+        color: #ffffff; /* White text for menu items */
+        text-decoration: none;
+        padding: 10px 20px;
+        display: inline-block;
+      }
+    </style>
+</head>
+<body>
+    <!-- Menu Bar -->
+    <div class="menu-bar">
+        <a href="https://www.emilwestling.com/index.html">About Me</a>
+        <a href="https://www.emilwestling.com/portfolio.html">Portfolio</a>
+        <a href="https://www.emilwestling.com/resume.pdf" target="_blank">Resume</a>
+      </div>
+    <header>
+        <h1>LSTM Trading Strategy</h1>
+    </header>
+    <nav>
+        <a href="#overview">Overview</a>
+        <a href="#data-collection">Data Collection</a>
+        <a href="#models">Models Used</a>
+        <a href="#strategy">Strategy</a>
+        <a href="#results">Results</a>
+        <a href="#conclusions">Conclusion</a>
+        <a href="#github">Project Repository</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    <div class="container">
+        <section id="overview" class="section">
+            <h2>Overview</h2>
+            <p>
+                This project is developed under mentorship of Dr. Fahad Sultan. Dr. Sultan is a professor in computer science at Furman University and we conducted this project as a half-year research project. The project focuses on analyzing and predicting the stock prices of the top 150 companies by dollar volume in the S&P 500 index using LSTM (Long Short-Term Memory) models. The model predicts stock prices and optimizes a portfolio based on these predictions.
+            </p>
+            <p>
+                Key features of this project include:
+                <ul>
+                    <li>Data extraction and preprocessing from Yahoo Finance.</li>
+                    <li>Implementation of LSTM models for stock price prediction.</li>
+                    <li>Optimization of portfolio weights using the Efficient Frontier.</li>
+                    <li>Performance evaluation against SPY (S&P 500 ETF) and visualization of returns.</li>
+                </ul>
+            </p>
+        </section>
+        <section id="data-collection" class="section">
+            <h2>Data Collection</h2>
+            <ul>
+                <li>
+                    <strong>Yahoo Finance:</strong> Historical stock data for all companies in the S&P 500 index from 2000-01-01 to 2024-02-19.
+                </li>
+                <li>
+                    <strong>Wikipedia:</strong> List of companies in the S&P 500 index used to filter the stock symbols.
+                </li>
+            </ul>
+        </section>
+        <section id="models" class="section">
+            <h2>Models Used</h2>
+            <p><strong>Long Short-Term Memory (LSTM) Model:</strong></p>
+            <ul>
+                <li>
+                    <strong>Stock Price Prediction:</strong> Predicts the stock price using historical stock data, adjusting for relevant time-series patterns.
+                </li>
+                <li>
+                    <strong>Portfolio Optimization:</strong> Optimizes a portfolio based on predicted stock prices using the Sharpe ratio as the primary metric.
+                </li>
+            </ul>
+            <p>The models are trained on historical data and backtested using recent data to ensure robustness and accuracy in predictions.</p>
+        </section>
+        <section id="strategy" class="section">
+            <h2>Trading Strategy</h2>
+            <p><strong>The trading strategy developed can be broken down in these steps:</strong></p>
+            <ul>
+                <li>
+                    <strong>LSTM Predictions</strong> Use the Long-Short Term Memory model to predict the stock price of the each stock at the end of the following month. 
+                </li>
+                <li>
+                    <strong>Top 15 Stocks</strong> Pick out the top 15 best performing stocks for the following month. If there aren't 15 stocks with positve returns, only pick the ones with predicted positive returns.
+                </li>
+                <li>
+                    <strong>Optimize Weights</strong> Optimize the weights for the portfolio based on the sharpe ratio. I.e. maximize the sharpe ratio for the portfolio.
+                </li>
+                <li>
+                    <strong>Repeat</strong> Repeat for each month.
+                </li>
+        </section>
+        <section id="results" class="section">
+            <h2>Results</h2>
+            <div class="visualization">
+                <h3>Portfolio Performance</h3>
+                <img src="images/portfolio_performance.png" alt="Portfolio Performance" />
+            </div>
+        </section>
+        <section id="conclusions" class="section">
+            <h2>Conclusion</h2>
+            <p>
+                We managed to generate a trading strategy that outperforms the S&P 500 index substainally. I would like to express my gratitude to Professor Sultan for his guidance. 
+            </p>
+        </section>
+
+        <section id="github" class="section">
+            <h2>Project Repository</h2>
+            <p>
+                The full code and dataset are available on my
+                <a class="link" href="https://github.com/emilwestling/QuantTrading" target="_blank">GitHub repository</a>.
+            </p>
+        </section>
+        <section id="contact" class="section">
+            <h2>Contact</h2>
+            <p>
+                For more information or inquiries about this project, please contact me at:
+                <br>
+                <a class="link" href="mailto:westling01@gmail.com">westling01@gmail.com</a>
+            </p>
+        </section>
+    </div>
+    <footer>
+        <p>&copy; 2024 Emil Westling. All rights reserved.</p>
+    </footer>
+</body>
+</html>
